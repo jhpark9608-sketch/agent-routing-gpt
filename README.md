@@ -270,6 +270,78 @@ Sol Medium
 
 ---
 
+
+## Benchmark
+
+This repository includes an A/B benchmark template for measuring whether model routing actually reduces Codex usage **without sacrificing task quality**.
+
+### Conditions
+
+| Condition | Configuration |
+|---|---|
+| Baseline | GPT-5.6 Sol Medium as the single primary agent |
+| Routing | agent-routing-gpt: Luna Max → Terra High → Sol Low → Sol Medium |
+
+### What to measure
+
+- uncached input tokens
+- cached input tokens
+- output tokens
+- total credits
+- wall-clock time
+- Sol call count
+- task success
+- test pass rate
+
+Do not rely only on the usage number shown inside an individual Codex chat. Subagent or separate-task usage may not be fully represented there. For the most complete comparison available to you, record the run time window and use Codex / Work **Usage & billing** token and credit history where available.
+
+### Experimental controls
+
+For each paired A/B run:
+
+1. Start from the same target-repository commit.
+2. Use the exact same prompt.
+3. Start a fresh Codex session.
+4. Alternate run order to reduce cache/order bias.
+5. Record cached and uncached input separately.
+6. Use at least 3 repetitions per task when practical.
+7. Evaluate quality before claiming a cost reduction.
+
+The included benchmark pack contains 10 tasks centered on current LLM, Agentic RAG, GraphRAG, Ontology, and Knowledge Graph engineering.
+
+~~~text
+benchmarks/
+├── README.md
+├── LLM_ONTOLOGY_KG_PROMPTS.md
+├── task_manifest.csv
+├── results.csv
+├── compare_results.py
+└── tasks/
+    ├── 01_codebase_map.md
+    ├── 02_structured_entity_extraction.md
+    ├── 03_ontology_validation.md
+    ├── 04_open_world_entity_resolution.md
+    ├── 05_hybrid_graph_vector_retrieval.md
+    ├── 06_query_router_and_planner.md
+    ├── 07_agentic_graphrag_loop.md
+    ├── 08_provenance_claim_verification.md
+    ├── 09_ontology_induction_alignment.md
+    └── 10_end_to_end_evaluation.md
+~~~
+
+After entering run data into benchmarks/results.csv:
+
+~~~bash
+python benchmarks/compare_results.py benchmarks/results.csv \
+  --output benchmarks/BENCHMARK_RESULTS.md
+~~~
+
+The script produces a GitHub-ready summary with cost reduction, token usage, success rate, test pass rate, runtime, and Sol-call statistics.
+
+**Benchmark status:** awaiting measured runs. No efficiency claim should be made until paired results are collected.
+
+---
+
 ## How to use
 
 ### 1. Project-level 사용

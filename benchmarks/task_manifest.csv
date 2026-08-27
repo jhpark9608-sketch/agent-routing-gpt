@@ -1,0 +1,11 @@
+task_id,task_name,category,difficulty,file
+01,"Codebase Map",discovery,easy,tasks/01_codebase_map.md
+02,"Structured Entity Extraction",implementation,medium,tasks/02_structured_entity_extraction.md
+03,"Ontology Validation",implementation,medium,tasks/03_ontology_validation.md
+04,"Open-World Entity Resolution",reasoning_implementation,medium,tasks/04_open_world_entity_resolution.md
+05,"Hybrid Graph + Vector Retrieval",retrieval,medium,tasks/05_hybrid_graph_vector_retrieval.md
+06,"Query Router and Planner",agentic_rag,hard,tasks/06_query_router_and_planner.md
+07,"Bounded Agentic GraphRAG Loop",agentic_rag,hard,tasks/07_agentic_graphrag_loop.md
+08,"Provenance and Claim Verification",verification,hard,tasks/08_provenance_claim_verification.md
+09,"Ontology Induction and Alignment",ontology,hard,tasks/09_ontology_induction_alignment.md
+10,"End-to-End Evaluation Harness",evaluation,hard,tasks/10_end_to_end_evaluation.md
