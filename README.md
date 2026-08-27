@@ -5,27 +5,26 @@ Codex에서 **성능을 유지하면서 불필요한 고비용 모델 사용을 
 ## Architecture
 
 ```mermaid
-flowchart TD
+flowchart LR
     U[User Task] --> T[Terra High<br/>Default Orchestrator]
 
-    T -->|Bounded search / repetitive work| L[Luna Max<br/>Low-cost Worker]
-    L -->|Concise findings| T
+    T -->|Search / repetitive| L[Luna Max<br/>Low-cost Worker]
+    T -->|Normal engineering| I[Terra High<br/>Implement · Integrate · Test]
+    T -->|Difficult reasoning| S1[Sol Low<br/>Reasoning Specialist]
 
-    T -->|Normal implementation / integration / tests| T
+    L --> I
+    S1 --> I
+    S1 -->|Still unresolved / high-impact| S2[Sol Medium<br/>Final Reviewer]
+    S2 --> I
 
-    T -->|Difficult problem after narrowing| S1[Sol Low<br/>Reasoning Specialist]
-    S1 -->|Diagnosis / verification plan| T
+    I --> O[Validated Output]
 
-    T -->|Unresolved or high-impact| S2[Sol Medium<br/>Final Reviewer]
-    S2 -->|Decision / review| T
-
-    T --> O[Validated Output]
-
-    E[Sol Token Firewall<br/>Narrow problem → Evidence packet → Sol] -.-> S1
-    E -.-> S2
+    F[Sol Token Firewall<br/>Narrow problem → Evidence packet] -.-> S1
+    F -.-> S2
 ```
 
-**Routing principle:** cheap exploration first, Terra for normal engineering, and Sol only after the problem has been narrowed.
+**Routing principle:** Luna handles cheap bounded work, Terra owns normal engineering and integration, and Sol is used only after the problem has been narrowed.
+
 
 ---
 
