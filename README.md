@@ -2,6 +2,33 @@
 
 Codex에서 **성능을 유지하면서 불필요한 고비용 모델 사용을 줄이기 위한 멀티 에이전트 라우팅 템플릿**입니다.
 
+## Architecture
+
+```mermaid
+flowchart TD
+    U[User Task] --> T[Terra High<br/>Default Orchestrator]
+
+    T -->|Bounded search / repetitive work| L[Luna Max<br/>Low-cost Worker]
+    L -->|Concise findings| T
+
+    T -->|Normal implementation / integration / tests| T
+
+    T -->|Difficult problem after narrowing| S1[Sol Low<br/>Reasoning Specialist]
+    S1 -->|Diagnosis / verification plan| T
+
+    T -->|Unresolved or high-impact| S2[Sol Medium<br/>Final Reviewer]
+    S2 -->|Decision / review| T
+
+    T --> O[Validated Output]
+
+    E[Sol Token Firewall<br/>Narrow problem → Evidence packet → Sol] -.-> S1
+    E -.-> S2
+```
+
+**Routing principle:** cheap exploration first, Terra for normal engineering, and Sol only after the problem has been narrowed.
+
+---
+
 ## Why this project exists
 
 큰 코드베이스에서 Codex를 사용할 때 한 가지 모델만 계속 쓰면 두 가지 문제가 생깁니다.
